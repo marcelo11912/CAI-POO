@@ -10,6 +10,7 @@ public class CAIgit {
     public static void main(String[] args) {
         Dificultad dificultad = new Dificultad();
         TipoProblema problema = new TipoProblema();
+        NumeroAleatorio numeroAleatorio = new NumeroAleatorio();
         Scanner lector = new Scanner(System.in);
         int preguntasCorrectas = 0;
         int preguntasIncorrectas = 0;
@@ -19,8 +20,13 @@ public class CAIgit {
 
         int nivelDificultad = dificultad.pedirNivelDificultad(lector);
         int tipoProblema = problema.pedirTipoProblema(lector);
+        ComentarioPositivoAleatorio postivo = new ComentarioPositivoAleatorio();
+        ComentarioNegativoAleatorio negativo = new ComentarioNegativoAleatorio();
+        Reiniciar reiniciar = new Reiniciar();
+
         SecureRandom generadorAleatorio = new SecureRandom();
-         while (preguntasTotales < 10) {
+
+        while (preguntasTotales < 10) {
             int numero1 = numeroAleatorio.generarNumeroAleatorio(nivelDificultad, generadorAleatorio);
             int numero2 = numeroAleatorio.generarNumeroAleatorio(nivelDificultad, generadorAleatorio);
             int resultado;
@@ -70,8 +76,10 @@ public class CAIgit {
                     resultado = 0;
                     break;
             }
-             respuesta = lector.nextInt();
-             if (respuesta == resultado) {
+
+            respuesta = lector.nextInt();
+
+            if (respuesta == resultado) {
                 preguntasCorrectas++;
                 System.out.println(postivo.obtenerComentarioPositivoAleatorio(generadorAleatorio));
             } else {
@@ -83,7 +91,17 @@ public class CAIgit {
                 System.out.println(postivo.obtenerComentarioPositivoAleatorio(generadorAleatorio));
                 preguntasIncorrectas++;
             }
-
+            preguntasTotales++;
             
         }
+          double porcentajeCorrectas = (preguntasCorrectas / 10.00) * 100;
+
+            if (porcentajeCorrectas < PORCENTAJE_APROBACION) {
+                System.out.println("Por favor pide ayuda adicional a tu instructor.");
+            } else if (porcentajeCorrectas >=PORCENTAJE_APROBACION) {
+                System.out.println("¡Felicidades, estás listo para pasar al siguiente nivel!");
+                reiniciar.reiniciarPrograma(lector);
+            }
+   
+    }
 }

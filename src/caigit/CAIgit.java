@@ -71,6 +71,18 @@ public class CAIgit {
                     break;
             }
              respuesta = lector.nextInt();
+             if (respuesta == resultado) {
+                preguntasCorrectas++;
+                System.out.println(postivo.obtenerComentarioPositivoAleatorio(generadorAleatorio));
+            } else {
+                System.out.println(negativo.obtenerComentarioNegativoAleatorio(generadorAleatorio));
+                while (respuesta != resultado) {
+                    System.out.print("Inténtalo nuevamente: ");
+                    respuesta = lector.nextInt();
+                }
+                System.out.println(postivo.obtenerComentarioPositivoAleatorio(generadorAleatorio));
+                preguntasIncorrectas++;
+            }
 
             
         }

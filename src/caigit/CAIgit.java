@@ -70,6 +70,8 @@ public class CAIgit {
                     resultado = 0;
                     break;
             }
+             respuesta = lector.nextInt();
+
             
         }
 }
